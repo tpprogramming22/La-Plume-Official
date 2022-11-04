@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 
-import { getPosts } from './actions/posts'
+import { getPosts } from "./actions/posts";
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 import laplumelogo from "./images/laplumelogo.png";
-import useStyles from './styles'
-
+import useStyles from "./styles";
 
 const App = () => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
+  const [currentId, setCurrentId] = useState(null);
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-      dispatch(getPosts());
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
 
   return (
     <Container maxwidth="lg">
@@ -23,7 +23,12 @@ const App = () => {
         {/* <Typography variant="h2" align="center">
           La Plume
         </Typography> */}
-        <img className={classes.image} src={laplumelogo} alt="laplumelogo" height="200" />
+        <img
+          className={classes.image}
+          src={laplumelogo}
+          alt="laplumelogo"
+          height="200"
+        />
       </AppBar>
       <Grow in>
         <Container>
@@ -34,10 +39,10 @@ const App = () => {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-                <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-                <Form />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
