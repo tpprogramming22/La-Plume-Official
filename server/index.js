@@ -17,6 +17,10 @@ app.use(cors());
 
 app.use('/posts', postRoutes)
 
+app.get('/', (req,res)=>{
+    res.send("Hello to La Plume")
+})
+
 const CONNECTION_URL = "mongodb+srv://admin1:JRwejFwSyYriZTup@cluster0.ye8wduj.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
